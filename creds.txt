@@ -1,0 +1,5 @@
+-- generate dummy password: admin 
+email: root@gmail.com
+firname: root
+org name: demo
+pass: pass123456

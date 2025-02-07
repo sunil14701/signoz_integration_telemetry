@@ -1,0 +1,23 @@
+services:
+  flask-app:
+    build: .
+    container_name: flask-app
+    environment:
+      - OTEL_SERVICE_NAME=flask-app
+      - OTEL_TRACES_EXPORTER=otlp,console
+      - OTEL_METRICS_EXPORTER=otlp,console
+      - OTEL_LOGS_EXPORTER=otlp,console
+      - OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=http://signoz-otel-collector:4317
+      - OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=http://signoz-otel-collector:4317
+      - OTEL_EXPORTER_OTLP_LOGS_ENDPOINT=http://signoz-otel-collector:4317
+      - OTEL_EXPORTER_OTLP_TRACES_INSECURE=true
+      - OTEL_EXPORTER_OTLP_METRICS_INSECURE=true
+      - OTEL_EXPORTER_OTLP_LOGS_INSECURE=true
+    ports:
+      - "5000:5000"
+    networks:
+    - signoz-net
+
+networks:
+  signoz-net:
+    name: signoz-net
